@@ -5,6 +5,10 @@ const connectDb = require("./utils/db");
 const mainRoutes = require('./Routes/main-route')
 const userRoutes = require('./Routes/user-routes')
 const accountRoutes = require('./Routes/account-routes')
+require('dotenv').config();
+
+// Now you can access process.env.MONGODB_URI
+
 
 // MAIN MOtive IS TO MAKE THIS ROOTSERVER PAGE CLEAN 
 const app = express()
@@ -24,7 +28,7 @@ app.use(express.json());
 //  server will run and other is the call back function telling what we have to show on that server\
 // andbreq and res are the requests and response
 app.get('/', (req, res) => {
-    res.send('Hello World!aaaaaaaaaaaaaaaaaaaaaaa')
+    res.send('Hello World!aa')
   })
 
 
