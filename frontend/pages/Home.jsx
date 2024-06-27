@@ -1,77 +1,156 @@
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../src/store/auth";
-import {
-  FaMoneyBillWave,
-  FaExchangeAlt,
-  FaPhoneAlt,
-  FaWallet,
-} from "react-icons/fa";
-import {
-  SiTailwindcss,
-  SiReact,
-  SiJavascript,
-  SiMongodb,
-  SiRedux,
-  SiExpress,
-} from "react-icons/si";
-import { Link } from "react-router-dom";
-import Send from "./Transfer";
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '../src/store/auth';
+import { FaMoneyBillWave, FaExchangeAlt, FaPhoneAlt } from 'react-icons/fa';
+import { SiTailwindcss, SiReact, SiJavascript, SiMongodb, SiRedux, SiExpress } from 'react-icons/si';
+import { Link } from 'react-router-dom';
+import Send from './Transfer';
 
 const Home = () => {
-  const { user, tokenval, balance, getBalance } = useAuth();
+  const { user, balance, getBalance, getTransactions ,accountId} = useAuth();
+  const [transactions, setTransactions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const transactionsPerPage = 6;
+  const [error, setError] = useState(null);
+
+
+    // Pagination logic
+    const indexOfLastTransaction = currentPage * transactionsPerPage;
+    const indexOfFirstTransaction = indexOfLastTransaction - transactionsPerPage;
+    const currentTransactions = transactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
+  
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    getBalance();
-  }, [balance]);
+    if (user) {
+      getBalance();
+    }
+  }, [user, getBalance]);
 
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        if (user ) {
+          const data = await getTransactions(accountId);
+          console.log(data);
+
+          if (Array.isArray(data)) {
+            console.log('d');
+            setTransactions(data);
+            console.log('c');
+          } else {
+            console.log('zz');
+            throw new Error('Expected an array of transactions');
+          }
+        }
+        else{
+          console.log('aaaaaaaaaaaaa');
+        }
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+        setError(error.message);
+      }
+    };
+
+    fetchTransactions();
+  }, [accountId]);
   return (
-    <div className="bg-gray-100 min-h-screen">
-      {/* Header */}
-   
+    <>
+      <div className="bg-gray-100 max-h-screen">
+        {/* Header */}
 
-      {/* Main Content */}
-      <main className="container flex flex-row-reverse gap-[5vw]  mx-auto py-8 w-[100vw]">
-        {/* Welcome Section */}
-        <section className="bg-white shadow-md rounded-lg p-6 mb-8 animate-fadeIn w-[40vw]">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-            {" "}
-            <p className="text-[4vh]">
-              Hi,
-              {`${user.username}`}
-            </p>
-          </h2>
-          <p className="text-gray-600 text-2xl ">
-            Here's an overview of your wallet:
-          </p>
-          {/* Wallet Balance */}
-          <div className="bg-green-100 rounded-lg p-4 mt-4">
-            <h3 className="text-lg font-bold text-green-800">Wallet Balance</h3>
-            <p className="text-3xl font-bold text-green-800 animate-pulse">
-              {" "}
-              &#8377; {Math.round(balance * 100) / 100}
-            </p>
-          </div>
-
-          <section className="bg-white shadow-md rounded-lg p-6 mb-8">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Recent Transactions
+        {/* Main Content */}
+        <main className="container flex flex-row-reverse gap-[3vw] mx-auto py-8 w-full">
+          {/* Welcome Section */}
+          <section className="bg-white shadow-md rounded-lg p-6 animate-fadeIn w-[40vw]">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+              <p className="text-[4vh]">
+                Hi,
+                {`${user.username}`}
+              </p>
             </h2>
-            <ul>
-              {/* Transactions List */}
-              <li className="flex items-center justify-between py-2 border-b border-gray-200">
-                <div>
-                  <p className="text-gray-800 font-bold">
-                    Payment to ABC Company
-                  </p>
-                  <p className="text-gray-500 text-sm">May 28, 2024</p>
-                </div>
-                <p className="text-red-600 font-bold">- ₹ 1,000</p>
-              </li>
-              {/* Add more transactions */}
-            </ul>
+            <p className="text-gray-600 text-2xl ">
+              Here's an overview of your wallet:
+            </p>
+            {/* Wallet Balance */}
+            <div className="bg-green-100 rounded-lg p-4 mt-4">
+              <h3 className="text-lg font-bold text-green-800">Wallet Balance</h3>
+              <p className="text-3xl font-bold text-green-800 animate-pulse">
+                {" "}
+                &#8377; {Math.round(balance * 100) / 100}
+              </p>
+            </div>
+
+            <section className="bg-white shadow-md rounded-lg p-6 ">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">Past Transactions</h2>
+                {currentTransactions.length > 0 ? (
+                  <ul className="space-y-4">
+                    {currentTransactions.map((transaction) => (
+                      <li
+                        key={transaction._id}
+                        className={`p-4 rounded-lg shadow-md ${
+                          transaction.from.userId.username === user.username
+                            ? "bg-[#ff5c51]"
+                            : transaction.to.userId.username === user.username
+                            ? "bg-green-100"
+                            : ""
+                        }`}
+                      >
+                        {transaction.from.userId.username === user.username ? (
+                          <>
+                            <span className=' text-[#e0ffff] text-2xl font-bold '><span className='text-black font-normal'>Sent to</span>  {transaction.to.userId.username}</span>
+                            <span className="float-right text-3xl">- &#8377;{transaction.amount}</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>From {transaction.from.userId.username}</span>
+                            <span className="float-right">+ &#8377;{transaction.amount}</span>
+                          </>
+                        )}
+                        <div className="text-xl text-[#2B7A78]">
+                          {new Date(transaction.date).toLocaleString()}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p>No transactions found.</p>
+                )}
+
+                {/* Pagination */}
+                {transactions.length > transactionsPerPage && (
+                  <div className="flex justify-center mt-4">
+                    <button
+                      onClick={() => paginate(currentPage - 1)}
+                      disabled={currentPage === 1}
+                      className={`px-4 py-2 bg-gray-300 text-gray-800 rounded-l-md  ${currentPage === 1 ? ' cursor-not-allowed':' cursor-pointer'} `}
+                    >
+                      Prev
+                    </button>
+                    {Array.from({ length: Math.ceil(transactions.length / transactionsPerPage) }, (_, index) => (
+                      <button
+                        key={index + 1}
+                        onClick={() => paginate(index + 1)}
+                        className={`px-4 py-2 ${
+                          currentPage === index + 1 ? "bg-gray-800 text-white" : "bg-gray-300 text-gray-800"
+                        }`}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                    <button
+                      onClick={() => paginate(currentPage + 1)}
+                      disabled={currentPage === Math.ceil(transactions.length / transactionsPerPage)}
+                      className={`px-4 py-2 bg-gray-300 text-gray-800 rounded-r-md  ${currentPage === Math.ceil(transactions.length / transactionsPerPage) ? ' cursor-not-allowed':' cursor-pointer'} `}
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+              </div>
+            </section>
           </section>
-        </section>
-        <section className="flex flex-col w-[50vw] ">
+        <section className="flex flex-col w-[55vw] ">
           <section className="flex flex-col md:flex-row items-center justify-between mb-12 p-7 rounded-md bg-[#343736]">
             <div className="md:w-1/2">
               <h2 className="text-4xl font-bold text-white mb-4 flex gap-[1vw]">
@@ -160,13 +239,10 @@ const Home = () => {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-6">
-        <div className="container mx-auto text-center">
-          <p>&copy; 2024 Graytm Wallet. All rights reserved.</p>
-        </div>
-      </footer>
+ 
     </div>
+       
+    </>
   );
 };
 

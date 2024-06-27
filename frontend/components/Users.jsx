@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 
 export const Users = () => {
-  const { tokenval } = useAuth();
+  const { tokenval,user } = useAuth();
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
@@ -38,8 +38,21 @@ export const Users = () => {
 
   return (
     <div className="text-white">
-      <div className="text-6xl mb-4 text-center">Transfer Money to Anyone</div>
-      <div className="mb-[5vh] flex items-center justify-center ">
+      <div className="text-6xl mb-4 text-center">Transfer Money</div>
+      <div className="text-center ">
+          {user ? (
+            <p className="text-[3vh]">
+            
+              <span className="text-yellow-500">
+                {`${user.username.charAt(0).toUpperCase()}${user.username.slice(1)}`}
+              </span>, Send money to any user you like .
+
+            </p>
+          ) : (
+            <p className="text-5xl">Welcome to GRAYTM</p>
+          )}
+        </div>
+      <div className="mb-[1vh] flex items-center justify-center ">
         <input
           type="text"
           placeholder="Search users..."
@@ -47,9 +60,10 @@ export const Users = () => {
           onChange={(e) => setFilter(e.target.value)}
         />
       </div>
+     
       
       <div className="text-3xl text-yellow-500 text-left pl-3 p-4 rounded-md w-[40vw] mx-auto mb-2">All Users</div>
-      <div className="max-h-[60vh] overflow-y-auto no-scrollbar mb-4">
+      <div className="max-h-[55vh] overflow-y-auto no-scrollbar mb-4">
         {displayedUsers.map((user) => (
           <UserCard key={user._id} user={user} />
         ))}

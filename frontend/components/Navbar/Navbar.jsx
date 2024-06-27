@@ -53,10 +53,10 @@ const Navbar = () => {
   // const adminYes = navItems.filter(item => item.title !== "Register" && item.title !== "Login");
   return (
     <>
-      <nav className="bg-[#82EBD1] flex justify-between items-center p-2.5 sticky top-0 text-2xl">
+      <nav className="bg-[#3AA5A9] flex justify-between items-center p-2.5 sticky top-0 text-2xl">
         <div className=" w-1/4 text-center flex">
           {isLoggedIn && (
-            <div className=" w-20 h-20 rounded-full flex bg-[#409DB9]">
+            <div className=" w-20 h-20 rounded-full flex bg-[#2B7A78]">
               <div className=" text-[6vh] m-auto">
                 {user.username ? (
                   <p className=" text-[5vh] p-2 m-auto">{`${user.username
@@ -69,7 +69,7 @@ const Navbar = () => {
             </div>
           )}
           <Link
-            className="text-[5vh] m-auto font-bold tracking-widest text-[#343736] "
+            className="text-[5vh] my-auto ml-[1vw] font-bold tracking-widest text-[#343736] "
             to="/graytm"
           >
             GRAYTM
@@ -84,7 +84,7 @@ const Navbar = () => {
               to={item.url}
               className={
                 location.pathname === item.url
-                  ? "border-b-3 border-black text-[#409DB9] no-underline font-semibold p-1 transition duration-300 text-[3.2vh] "
+                  ? "border-b-3 border-black text-[#DEF2F1] no-underline font-semibold p-1 transition duration-300 text-[3.2vh] "
                   : "no-underline text-black font-semibold p-1 hover:text-gray-600 transition duration-200  text-[3.2vh] "
               }
             >

@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 // CONTEXT
 export const AuthContext= createContext();
-
+import axios from 'axios';
 
 
 // PROVIDER BELOW
@@ -19,6 +19,7 @@ const [adminContactData,setAdminContactData]=useState("");
 const [isLoading,setIsLoading]=useState(true);
 const [isAdminn,setIsAdminn]= useState(false);
 const [balance, setBalance] = useState(0);
+const [accountId, setAccountId] = useState(0);
 
 
 // const updateUserAdminStatus = (newStatus) => {
@@ -259,13 +260,27 @@ const [balance, setBalance] = useState(0);
   
           if (balanceResponse.ok) {
             const bData = await balanceResponse.json();
+         
             setBalance(bData.balance);
+            setAccountId(bData.acc);
+            console.log("id", bData.acc);
             console.log("Balance", bData.balance);
           } else {
             console.log("Balance", balanceResponse);
           }
         } catch (error) {
           console.log(`Balance Side Error ${error}`);
+        }
+      };
+
+      const getTransactions = async (userId) => {
+        try {
+          const response = await axios.get(`http://localhost:8000/graytm/account/transactions/${userId}`);
+          console.log(response);
+          return response.data;
+        } catch (error) {
+          console.error('Error fetching transactions:', error);
+          throw error;
         }
       };
   // useEffect(() => {
@@ -276,7 +291,7 @@ const [balance, setBalance] = useState(0);
 
 
 
-return <AuthContext.Provider value={{isLoggedIn,storeTokenInLocal,logoutFunc,user,services,adminUserData,adminContactData,isAdminn,tokenval,balance,getBalance}}> {/* any components can access to the function mentioned  here */}
+return <AuthContext.Provider value={{isLoggedIn,storeTokenInLocal,logoutFunc,user,services,adminUserData,adminContactData,isAdminn,tokenval,balance,accountId,getBalance,getTransactions}}> {/* any components can access to the function mentioned  here */}
 {/* isLoading,updateUserAdminStatus,isAdminn,loginFunc */}
 
 {children}

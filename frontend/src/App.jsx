@@ -15,6 +15,7 @@ import AdminContacts from '../components/Admin Components/AdminContacts'
 import { SendMoney } from '../pages/SendMoney'
 import { useAuth } from './store/auth'
 import Transfer from '../pages/Transfer'
+import Footer from '../components/Footer'
 
 
 
@@ -49,6 +50,7 @@ const App = () => {
           )} */}
       <Route path='*' element={<Error/>}/>
     </Routes>
+    <Footer/>
 
     </BrowserRouter>
   
