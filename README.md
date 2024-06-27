@@ -1,6 +1,7 @@
-# Graytm
+# Graytm Wallet
 Graytm Wallet.
-# MERN Project
+
+## MERN Project
 
 This is a MERN stack project with separate folders for the frontend and backend. The frontend runs on one port, and the backend on another.
 
@@ -27,10 +28,13 @@ This is a MERN stack project with separate folders for the frontend and backend.
     ```
 
 3. Create a `.env` file in the `backend` folder with the following content:
+
     ```
     MONGO_URI=your_mongodb_uri
     JWT_SECRET=your_jwt_secret
     ```
+
+    Replace `your_mongodb_uri` with your MongoDB connection URI and `your_jwt_secret` with your JWT secret key.
 
 4. Start the development servers:
     ```sh
