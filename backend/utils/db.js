@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// const URI = "mongodb://127.0.0.1:27017/first_mernadmin"//from mongosh and last part we have named
 require('dotenv').config();
 
 
