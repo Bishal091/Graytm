@@ -17,7 +17,7 @@ const port = 8000
 
 // CORS
 const corsOptions = {
-  origin: `https://graytm-wallet.onrender.com`,
+origin: 'https://graytm-wallet.netlify.app',
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
