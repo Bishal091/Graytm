@@ -46,7 +46,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8000/graytm/contact/message", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/graytm/contact/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

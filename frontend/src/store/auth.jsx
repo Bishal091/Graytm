@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 export const AuthContext= createContext();
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL;
 
 // PROVIDER BELOW
 // responsible for providing data(context) to its descendents
@@ -218,7 +219,7 @@ const [accountId, setAccountId] = useState(0);
           try {
             // Fetch user data only if tokenval is not null or empty
             if (tokenval) {
-              const response = await fetch('http://localhost:8000/graytm/user/data', {
+              const response = await fetch(`${API_URL}/graytm/user/data`, {
                 method: "GET",
                 headers: {
                   Authorization: `Bearer ${tokenval}`
@@ -249,7 +250,7 @@ const [accountId, setAccountId] = useState(0);
       const getBalance = async () => {
         try {
           const balanceResponse = await fetch(
-            "http://localhost:8000/graytm/account/balance",
+            `${API_URL}/graytm/account/balance`,
             {
               method: "GET",
               headers: {
@@ -275,7 +276,7 @@ const [accountId, setAccountId] = useState(0);
 
       const getTransactions = async (userId) => {
         try {
-          const response = await axios.get(`http://localhost:8000/graytm/account/transactions/${userId}`);
+          const response = await axios.get(`${API_URL}/graytm/account/transactions/${userId}`);
           console.log(response);
           return response.data;
         } catch (error) {

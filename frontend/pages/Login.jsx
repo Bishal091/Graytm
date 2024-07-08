@@ -28,7 +28,7 @@ const Login = () => {
     e.preventDefault();
     console.log("before", user);
     try {
-      const response = await fetch("http://localhost:8000/graytm/user/login", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/graytm/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

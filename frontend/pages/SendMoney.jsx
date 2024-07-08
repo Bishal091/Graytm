@@ -28,7 +28,7 @@ export const SendMoney = () => {
   
     try {
       const response = await axios.post(
-        "http://localhost:8000/graytm/account/transfer",
+        `${process.env.REACT_APP_API_URL}/graytm/account/transfer`,
         {
           to: id,
           amount,

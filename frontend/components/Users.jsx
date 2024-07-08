@@ -16,7 +16,7 @@ export const Users = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/graytm/user/bulk", {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/graytm/user/bulk`, {
           headers: { Authorization: `Bearer ${tokenval}` },
           params: { filter },
         });

@@ -17,7 +17,7 @@ const port = 8000
 
 // CORS
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: `${process.env.FRONTEND_URL}`,
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
@@ -29,7 +29,7 @@ app.use(express.json());
 //  server will run and other is the call back function telling what we have to show on that server\
 // andbreq and res are the requests and response
 app.get('/', (req, res) => {
-    res.send('Hello World!aa')
+    res.send('Hello World')
   })
 
 
