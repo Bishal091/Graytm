@@ -5,6 +5,7 @@ const connectDb = require("./utils/db");
 const mainRoutes = require('./Routes/main-route')
 const userRoutes = require('./Routes/user-routes')
 const accountRoutes = require('./Routes/account-routes')
+const contactRoutes = require("./Routes/contact-route")
 require('dotenv').config();
 
 // Now you can access process.env.MONGODB_URI
@@ -35,6 +36,9 @@ app.get('/', (req, res) => {
   app.use('/graytm/main', mainRoutes)
   app.use('/graytm/user', userRoutes)
   app.use('/graytm/account',accountRoutes)
+
+  app.use("/graytm/contact/message",contactRoutes);
+  
 
 // app.get('/register', (req, res) => {
 //     res.send('Welcome to the registration page')

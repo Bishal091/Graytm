@@ -18,8 +18,8 @@ const contactSchema = z.object({
 
   message:z
   .string({ required_error: "Please add your message!" })
-  .min(2, { message: "Message must be minimum of 7 characters" })
-  .max(256, { message: "Max Characters of 26 for message." }),
+  .min(1, { message: "Message must be minimum of 7 characters" })
+  .max(256, { message: "Max Characters of 256 for message." }),
 });
 
 

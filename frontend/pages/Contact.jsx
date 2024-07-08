@@ -1,115 +1,105 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../src/store/auth';
-import {toast}  from "react-toastify";
+import { toast } from 'react-toastify';
 import { FaGithub, FaLinkedinIn, FaPhoneAlt, FaTwitter } from 'react-icons/fa';
 
+// Import CSS for react-toastify
+import 'react-toastify/dist/ReactToastify.css';
 
-
+// Initialize Toastify
 
 
 const Contact = () => {
+  const [contact, setContact] = useState({
+    username: '',
+    email: '',
+    message: ''
+  });
 
-    const[contact,setContact]= useState({
-      username:'',
-        email:'',
-        message:''
-      })
+  const { user } = useAuth(); // This user has all the data of the user
+  const [userDataClient, setUserDataClient] = useState(true);
 
+  useEffect(() => {
+    // Fetch user data only once on component mount
+    if (userDataClient && user) {
+      setContact({
+        username: user.username,
+        email: user.email,
+        message: ""
+      });
 
-const {user}=useAuth();//this user has all the data of the user
-const[userDataClient,setUserDataClient]=useState(true);
+      setUserDataClient(false);
+    }
+  }, [user, userDataClient]);
 
-if(userDataClient&&user){//so that when page refreshes first time username and email of the logged in user appears in the contact form inputs
-  setContact({
-    username:user.username,
-    email:user.email,
-    message:""
-  })
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
-  setUserDataClient(false)
-}
+    setContact({
+      ...contact,
+      [name]: value,
+    });
+  };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      const handleChange =(e)=>{
-        
-        console.log(e);
-        let name= e.target.name;
-        let value = e.target.value;
+    try {
+      const response = await fetch("http://localhost:8000/graytm/contact/message", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contact),
+      });
 
+      const data = await response.json(); // Get the response data
+
+      if (response.ok) {
+        toast.success(data.msg || 'Message sent successfully!');
         setContact({
-            ...contact,
-            [name]:value,
-        }
-        );
-      };
-
-      const handleSubmit = async (e) =>{
-        e.preventDefault();
-        // alert(contact.message);
-        // console.log(contact);//will give all the updated data inputed by user
-
-        try {
-          const response = await fetch("http://localhost:8000/auth/form/contact", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(contact),
-          });
-    
-          // console.log("response data : ", await response.json()); //Response can only be used once
-    
-          if (response.ok) {
-          //  const res_data = await response.json();
-          //  console.log(res_data)
-          //  1st method: directly putting the token inside the local storage, but will be good if we do that using a function
-          // localStorage.setItem("token",res_data.token)
-    
-    
-          // 2nd method as this  will be good if we do that using a function, giveing the token value as a parameter to func
-          // storeTokenInLocal(res_data.token);
-    
-            setUserDataClient(true)
-              toast.info("Message sent successfully");
-            // console.log(responseData);
-          } else {
-            console.log("error inside response ", response.statusText);
-            
-
-          }
-        } catch (error) {
-          console.error("Error", error);
-        }
+          username: user.username,
+          email: user.email,
+          message: ""
+        });
+      } else {
+        toast.error(data.msg);
       }
+    } catch (error) {
+      toast.error('An unexpected error occurred');
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <>
- <div className="bg-[#343736] h-[90vh] flex items-center justify-center">
-  <div className="w-[55vw] mx-auto h-[75vh] bg-neutral-800 rounded-lg shadow-md overflow-hidden">
-    <div className="md:flex h-full">
-      <div className="md:w-[40%] bg-gradient-to-tr from-green-500 to-[#409DB9] p-8 flex flex-col justify-between">
-        <div className="flex items-center justify-center mb-6">
-          {/* <FaPhoneAlt className="text-5xl text-white mr-4" /> */}
-          <h2 className="text-[4vh] font-bold text-white">Contact Me</h2>
+  <div className="bg-gradient-to-br from-gray-600 to-gray-800 bg-[length:200%_200%] animate-gradient-x min-h-screen flex items-start lg:items-center justify-center p-4 sm:p-6 md:p-8 mt-[5vh] lg:mt-0">
+  <div className="w-full lg:max-w-6xl max-w-[90vw] mx-auto bg-neutral-800 rounded-2xl h-auto shadow-2xl overflow-hidden">
+    <div className="flex flex-col lg:flex-row h-full">
+      <div className="lg:w-2/5 bg-gradient-to-r from-green-500 to-[#409DB9] bg-[length:200%_200%] animate-gradient-x p-6 sm:p-8 flex flex-col justify-between">
+        <div className="text-center lg:text-left">
+          <h2 className="text-[4vh] sm:text-[4vh]  text-white mb-4">Contact Me</h2>
+          <p className="text-[2vh] sm:text-[2.2vh] text-white mb-8 italic">
+            I'd love to hear from you! Please fill out the form, and I'll be glad to receive your comments.
+          </p>
         </div>
-        <p className="text-lg text-white mb-8">
-          I'd love to hear from you! Please fill out the form, I'll be glad with your comments.
-        </p>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center lg:justify-start space-x-6">
           <a
-            href="https://github.com/Bishal091"
+            href="https://github.com/Bishal091/Graytm"
             target="_blank"
             rel="noopener noreferrer"
-            className="mr-4 text-white hover:text-gray-300 transition-colors duration-300"
+            className="text-white hover:text-gray-300 transition-colors duration-300"
           >
-            <FaGithub className="text-[4vh]" />
+            <FaGithub className="text-[3vh] sm:text-[4vh]" />
           </a>
           <a
             href="https://twitter.com/Bishal234113"
             target="_blank"
             rel="noopener noreferrer"
-            className="mr-4 text-white hover:text-gray-300 transition-colors duration-300"
+            className="text-white hover:text-gray-300 transition-colors duration-300"
           >
-            <FaTwitter className="text-[4vh]" />
+            <FaTwitter className="text-[3vh] sm:text-[4vh]" />
           </a>
           <a
             href="https://www.linkedin.com/in/bishal-singh-797129203/"
@@ -117,14 +107,14 @@ if(userDataClient&&user){//so that when page refreshes first time username and e
             rel="noopener noreferrer"
             className="text-white hover:text-gray-300 transition-colors duration-300"
           >
-            <FaLinkedinIn className="text-[4vh]" />
+            <FaLinkedinIn className="text-[3vh] sm:text-[4vh]" />
           </a>
         </div>
       </div>
-      <div className="md:w-full h-full p-8  overflow-y-auto">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="lg:w-3/5 p-6 sm:p-8 ">
+        <form onSubmit={handleSubmit} className="space-y-6 items-stretch flex flex-col">
           <div>
-            <label htmlFor="username" className="block text-white font-bold mb-2">
+            <label htmlFor="username" className="block text-white  mb-2 lg:text-[1.8vh] text-[2.5vh]">
               Username
             </label>
             <input
@@ -136,11 +126,11 @@ if(userDataClient&&user){//so that when page refreshes first time username and e
               autoComplete="off"
               onChange={handleChange}
               value={contact.username}
-              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-green-500"
+              className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 lg:text-[1.8vh] text-[2.5vh]"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block text-white font-bold mb-2">
+            <label htmlFor="email" className="block text-white  mb-2 lg:text-[1.8vh] text-[2.5vh]">
               E-Mail
             </label>
             <input
@@ -152,11 +142,11 @@ if(userDataClient&&user){//so that when page refreshes first time username and e
               autoComplete="off"
               onChange={handleChange}
               value={contact.email}
-              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-green-500"
+              className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 lg:text-[1.8vh] text-[2.5vh]"
             />
           </div>
           <div>
-            <label htmlFor="message" className="block text-white font-bold mb-2">
+            <label htmlFor="message" className="block text-white  mb-2 lg:text-[1.8vh] text-[2.5vh]">
               Message
             </label>
             <textarea
@@ -167,13 +157,12 @@ if(userDataClient&&user){//so that when page refreshes first time username and e
               required
               onChange={handleChange}
               value={contact.message}
-              className="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-green-500 h-32"
+              className="w-full px-4 py-3 h-[20vh]  rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500  lg:text-[1.8vh] text-[2.5vh]"
             />
           </div>
           <button
             type="submit"
-            onSubmit={handleSubmit}
-            className="bg-[#409DB9] text-white px-4 py-2 rounded-md hover:bg-green-600 transition-colors duration-300 w-full font-bold"
+            className="w-full bg-gradient-to-r from-green-500 to-[#409DB9] text-white px-6 py-3 rounded-lg hover:from-green-600 hover:to-[#3A8DA5] transition-all duration-300  text-[2.2vh]"
           >
             Send Message
           </button>
@@ -183,7 +172,7 @@ if(userDataClient&&user){//so that when page refreshes first time username and e
   </div>
 </div>
     </>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
