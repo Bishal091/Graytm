@@ -2,10 +2,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 
 // CONTEXT
-export const AuthContext= createContext();
 import axios from 'axios';
+export const AuthContext= createContext();
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = 'https://graytm-wallet.onrender.com';
 
 // PROVIDER BELOW
 // responsible for providing data(context) to its descendents

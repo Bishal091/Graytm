@@ -46,7 +46,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/graytm/contact/message`, {
+      const response = await fetch(`https://graytm-wallet.onrender.com/graytm/contact/message`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

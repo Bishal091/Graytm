@@ -28,7 +28,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/graytm/user/register`, {
+      const response = await fetch(`https://graytm-wallet.onrender.com/graytm/user/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

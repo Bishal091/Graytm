@@ -28,7 +28,7 @@ export const SendMoney = () => {
   
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/graytm/account/transfer`,
+        `https://graytm-wallet.onrender.com/graytm/account/transfer`,
         {
           to: id,
           amount,

@@ -17,7 +17,7 @@ const port = 8000
 
 // CORS
 const corsOptions = {
-  origin: `${process.env.FRONTEND_URL}`,
+  origin: `https://graytm-wallet.onrender.com`,
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
