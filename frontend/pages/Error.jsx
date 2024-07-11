@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const Error = () => {
   return (
-    <div>Error 404 
+    <div>Error Occured
     <NavLink to="/">Home</NavLink>
     <NavLink to="/Contact">Contact Us</NavLink>
     
