@@ -20,7 +20,7 @@ exports.register = async (req, res, next) => {
   //   await User.create(username,email,phone,password);
   // }
 
-  // console.log(req.body)
+  // //console.log(req.body)
   // res.json({message: req.body});
 
   try {
@@ -61,7 +61,7 @@ await Account.create({
     });
     // In most cases, converting _id to a string is a good practise because it ensures consistencey and compatibility across different JWT libraries and systems. It also aligns with the expectation  that claims in a JWT are represented as strings
   } catch (e) {
-    console.log("Error in RE gister side");
+    //console.log("Error in RE gister side");
   }
 };
 
@@ -76,7 +76,7 @@ exports.login = async (req, res, next) => {
     const { email, password } = req.body;
 
     const userExist = await User.findOne({ email });
-    console.log(userExist);
+    //console.log(userExist);
 
     if (!userExist) {
       return res
@@ -101,7 +101,7 @@ exports.login = async (req, res, next) => {
     }
   } catch (e) {
     res.status(500).json("ERROR");
-    console.log(e);
+    //console.log(e);
     // const status=500;
     // const extraDetails="Login Page Error";
     // const message="Backend Error";
@@ -142,7 +142,7 @@ exports.bulkuser = async (req, res) => {
       })),
     });
   } catch (error) {
-    console.log("Error from user Route", error);
+    //console.log("Error from user Route", error);
   }
 };
 
@@ -155,11 +155,11 @@ exports.user = async (req, res, ) => {
   try {
   //  res.status(200).json({msg:"Hello bishal "} )//for checking if the route is working properly or not using postman
   const userData=req.user;
-  console.log(userData);
+  //console.log(userData);
   return res.status(200).json({userData})
   
  } catch (error) {
-  console.log("Error from user Route",error);
+  //console.log("Error from user Route",error);
  }
 }
 
@@ -172,6 +172,6 @@ exports.update = async (req, res) => {
     });
     res.status(200).json({ msg: "Updated Successfully" });
   } catch (error) {
-    console.log("Error from user Route", error);
+    //console.log("Error from user Route", error);
   }
 };

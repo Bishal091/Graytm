@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { SiNotepadplusplus, SiTheregister } from "react-icons/si";
-import { FaClipboardCheck, FaWallet } from "react-icons/fa";
+import { FaArrowUp, FaClipboardCheck, FaLongArrowAltRight, FaUser, FaWallet } from "react-icons/fa";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Register = () => {
     email: "",
     password: "",
   });
-
+  const [loading, setLoading] = useState(false);
   function handleChange(e) {
     let name = e.target.name;
     let value = e.target.value;
@@ -26,6 +26,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await fetch(`https://graytm-wallet.onrender.com/graytm/user/register`, {
@@ -46,6 +47,9 @@ const Register = () => {
       }
     } catch (error) {
       console.error("Error", error);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -150,12 +154,49 @@ const Register = () => {
                       className="w-full px-4 py-2  text-[1.8vh] border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                     />
                   </div>
-                  <div>
+                  <div className=" grid grid-cols-2 gap-[1vw]">
                     <button
                       type="submit"
-                    className="w-full p-4 lg:text-[1.8vh] text-[2.5vh] mt-[3vh] bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                    className="w-full p-4 lg:text-[1.8vh] text-[2.2vh] mt-[3vh] bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                    >{loading ? (
+                    <div className="flex items-center justify-center space-x-2">
+                      <span>Registering...</span>
+                      <svg 
+  className="animate-spin lg:h-[1.8vh] lg:w-[1.8vh] h-[2.2vh] w-[2.2vh] text-white" 
+  xmlns="http://www.w3.org/2000/svg" 
+  fill="none" 
+  viewBox="0 0 24 24"
+>
+  <circle 
+    className="opacity-25" 
+    cx="12" 
+    cy="12" 
+    r="10" 
+    stroke="currentColor" 
+    strokeWidth="4"
+  ></circle>
+  <path 
+    className="opacity-75" 
+    fill="currentColor" 
+    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.96 7.96 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+  ></path>
+</svg>
+
+                    </div>
+                  ) : (
+                    'Register'
+                  )}
+                    
+                    </button>
+                    <button
+                      // onClick={navigatesR}
+                      onClick={(e) => {
+            navigate("/graytm/login");
+          }}
+                      className="hover:bg-[#000000] pr-5 hover:text-black mt-[3vh]  lg:text-[1.8vh] text-[2.1vh] rounded-lg bg-gradient-to-tr from-green-500 to-[#409DB9] flex text-center justify-center items-center "
                     >
-                      Register
+                     Already Registerd? Login
+                      <FaLongArrowAltRight className="lg:size-10 size-30" />
                     </button>
                   </div>
                 </form>

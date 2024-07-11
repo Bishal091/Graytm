@@ -22,10 +22,10 @@ html{
   scroll-behavior: smooth;
   /* padding: 1rem 1rem ; */
 }
-.toastBody{
+/* .toastBody{
   font-size: 1.2rem;
   font-weight: 600;
-}
+} */
 
 body {
   overflow: auto;
@@ -55,4 +55,27 @@ h1{
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+
+/* Custom styles for Toastify */
+.toastBody {
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+/* Large screens (desktops, 1024px and up) */
+@media (min-width: 1024px) {
+  .toastBody {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
+
+/* Extra large screens (large desktops, 1280px and up) */
+@media (min-width: 1280px) {
+  .toastBody {
+    font-size: 1.2rem;
+  font-weight: 600;
+  }
 }

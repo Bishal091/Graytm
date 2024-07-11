@@ -9,7 +9,7 @@ const validate = (schema)=> async(req,res,next) => {
         next();
 
     } catch (e) {
-        console.log(e);
+        //console.log(e);
         // will give all the issues and errors in console from where we can use it
         const msg = e.errors[0].message;
 

@@ -56,18 +56,18 @@ const Home = () => {
       try {
         if (user) {
           const data = await getTransactions(accountId);
-          console.log(data);
+          //console.log(data);
 
           if (Array.isArray(data)) {
-            console.log("d");
+            //console.log("d");
             setTransactions(data);
-            console.log("c");
+            //console.log("c");
           } else {
-            console.log("zz");
+            //console.log("zz");
             throw new Error("Expected an array of transactions");
           }
         } else {
-          console.log("aaaaaaaaaaaaa");
+          //console.log("aaaaaaaaaaaaa");
         }
       } catch (error) {
         console.error("Error fetching transactions:", error);

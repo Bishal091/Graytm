@@ -9,7 +9,7 @@ const Logout = () => {
   const hasPromptedRef = useRef(false);
 
   const handleLogout = async () => {
-    console.log("handleLogout called");
+    //console.log("handleLogout called");
     if (window.confirm("Are you sure you want to Logout?")) {
       try {
         await logoutFunc();
@@ -22,7 +22,7 @@ const Logout = () => {
       }
     } else {
       navigate("/graytm");
-      console.log("Cancel is clicked.");
+      //console.log("Cancel is clicked.");
     }
   };
 

@@ -14,11 +14,11 @@ require('dotenv').config();
 const connectDb = async () => {
     try {
        await mongoose.connect(process.env.MONGODB_URI);
-        console.log("Connection was Successfull bhenchod");
+        //console.log("Connection was Successfull bhenchod");
         
     } catch (e) {
-        console.log("Connection Unsuccessful");
-        console.log(e);
+        //console.log("Connection Unsuccessful");
+        //console.log(e);
         process.exit(0);
         
     }

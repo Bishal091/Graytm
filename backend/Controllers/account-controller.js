@@ -17,7 +17,7 @@ exports.balance = async (req, res, next) => {
       acc:account._id,
     });
   } catch (error) {
-    console.log("Error from Account Route", error);
+    //console.log("Error from Account Route", error);
     res.status(500).json({ message: "Internal server error" });
   }
 };

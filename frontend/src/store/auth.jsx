@@ -69,8 +69,8 @@ const [accountId, setAccountId] = useState(0);
 
 //         if (response.ok) {
 //             const data = await response.json();//all the userdata now comes inside data
-//             // console.log("user data",data.userData)//.userData is used because in the erver side in auth controller user logic we have defined uusr data using userData and this fetch url in going to that part
-//             // console.log("user data",data.userData.isAdmin)
+//             // //console.log("user data",data.userData)//.userData is used because in the erver side in auth controller user logic we have defined uusr data using userData and this fetch url in going to that part
+//             // //console.log("user data",data.userData.isAdmin)
 //             // setUser(data.userData);//will update all the details of user to setUser and user will now have all data
 //             // setIsLoading(false);
            
@@ -78,10 +78,10 @@ const [accountId, setAccountId] = useState(0);
 //         }
 //         else{
 //             // setIsLoading(false);
-//             console.log("Loading State Error");
+//             //console.log("Loading State Error");
 //         }
 //     } catch (error) {
-//         console.log("Error Fetching User Data",error);
+//         //console.log("Error Fetching User Data",error);
 //     }
 // }
 
@@ -96,14 +96,14 @@ const [accountId, setAccountId] = useState(0);
 
 //     if (response.ok) {
 //         const serviceData = await response.json();//all the userdata now comes inside data
-//         console.log(serviceData.response);//.response is added so as the console should be only one object
+//         //console.log(serviceData.response);//.response is added so as the console should be only one object
 //         setServices(serviceData.response);//will update all the details of user to setServices and user will now have all data
 
 //     }
     
     
 // } catch (error) {
-//     console.log(`Service Auth Error ${error}`);
+//     //console.log(`Service Auth Error ${error}`);
 // }
 
 // }
@@ -119,18 +119,18 @@ const [accountId, setAccountId] = useState(0);
 //         });
 //         if (adminResponse.ok) {
 //             const aData= await adminResponse.json();
-//             // console.log(aData.adminResponse);
+//             // //console.log(aData.adminResponse);
 //             setAdminUserData(aData.adminResponse);
-//             // console.log(tokenval);
-//             // console.log(tokenval);
+//             // //console.log(tokenval);
+//             // //console.log(tokenval);
 //             // setIsAdmin(true);
 //         }
 //         else{
-//             console.log("this is it",adminResponse);
+//             //console.log("this is it",adminResponse);
 //         }
         
 //     } catch (error) {
-//         console.log(`Admin Panel  ${error}`);
+//         //console.log(`Admin Panel  ${error}`);
 //     }
 // }
 
@@ -148,16 +148,16 @@ const [accountId, setAccountId] = useState(0);
 //         });
 //         if ( adminContactResponse .ok) {
 //             const aData= await  adminContactResponse.json();
-//             // console.log(aData.adminResponse);
+//             // //console.log(aData.adminResponse);
 //             setAdminContactData(aData.adminContactResponse );
 //             // setIsAdmin(true);
 //         }
 //         else{
-//             console.log("this is it", adminContactResponse );
+//             //console.log("this is it", adminContactResponse );
 //         }
         
 //     } catch (error) {
-//         console.log(`Admin Panel  ${error}`);
+//         //console.log(`Admin Panel  ${error}`);
 //     }
 // }
 
@@ -177,12 +177,12 @@ const [accountId, setAccountId] = useState(0);
 //         if (balanceResponse.ok) {
 //           const bData = await balanceResponse.json();
 //           setBalance(bData.balance);
-//           console.log("Balance", bData.balance);
+//           //console.log("Balance", bData.balance);
 //         } else {
-//           console.log("Balance", balanceResponse);
+//           //console.log("Balance", balanceResponse);
 //         }
 //       } catch (error) {
-//         console.log(`Balance Side Error ${error}`);
+//         //console.log(`Balance Side Error ${error}`);
 //       }
 //     };
 
@@ -204,8 +204,8 @@ const [accountId, setAccountId] = useState(0);
     useEffect(() => {
         // Here you can perform any actions that should happen when isAdmin changes
         // For example, you can update the state, make API calls, etc.
-        console.log("isAdmin value changed:",  user.isAdmin);
-        // console.log("tok before:",  tokenval);
+        //console.log("isAdmin value changed:",  user.isAdmin);
+        // //console.log("tok before:",  tokenval);
         // userDataCollection();
         // Set the value of isAdminn accordingly
         setIsAdminn(user.isAdmin);
@@ -228,16 +228,16 @@ const [accountId, setAccountId] = useState(0);
       
               if (response.ok) {
                 const data = await response.json();
-                console.log("user data", data.userData);
-                console.log("user data", data.userData.isAdmin);
+                //console.log("user data", data.userData);
+                //console.log("user data", data.userData.isAdmin);
                
                 setUser(data.userData);
               } else {
-                console.log("Loading State Error");
+                //console.log("Loading State Error");
               }
             }
           } catch (error) {
-            console.log("Error Fetching User Data", error);
+            //console.log("Error Fetching User Data", error);
           }
         };
       
@@ -264,20 +264,20 @@ const [accountId, setAccountId] = useState(0);
          
             setBalance(bData.balance);
             setAccountId(bData.acc);
-            console.log("id", bData.acc);
-            console.log("Balance", bData.balance);
+            //console.log("id", bData.acc);
+            //console.log("Balance", bData.balance);
           } else {
-            console.log("Balance", balanceResponse);
+            //console.log("Balance", balanceResponse);
           }
         } catch (error) {
-          console.log(`Balance Side Error ${error}`);
+          //console.log(`Balance Side Error ${error}`);
         }
       };
 
       const getTransactions = async (userId) => {
         try {
           const response = await axios.get(`${API_URL}/graytm/account/transactions/${userId}`);
-          console.log(response);
+          //console.log(response);
           return response.data;
         } catch (error) {
           console.error('Error fetching transactions:', error);

@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema({
 
 // //pre is a type of middle ware that runs before the implification of data in the database(save method), and the funcion to be run is to be defined after
 userSchema.pre("save", async function (next) {
-  console.log("pre method", this); //will show the data just before saving to database\(Here before applying the bcrypt method)
+  //console.log("pre method", this); //will show the data just before saving to database\(Here before applying the bcrypt method)
 
   const user = this;
 
@@ -48,7 +48,7 @@ userSchema.pre("save", async function (next) {
     const saltRound = await bcrypt.genSalt(10); //will define the strongness of the password the more the number the stronger
     const hash_password = await bcrypt.hash(user.password, saltRound);
     user.password = hash_password;
-    console.log("After applying Bcrypt method", this); //will show the data just before saving to database\(Here After applying the bcrypt method)
+    //console.log("After applying Bcrypt method", this); //will show the data just before saving to database\(Here After applying the bcrypt method)
   } catch (e) {
     next(e);
   }
@@ -86,7 +86,7 @@ userSchema.methods.generateToken = async function(){
         );
         
     } catch (e) {
-        console.log(e);
+        //console.log(e);
     }
 
 };

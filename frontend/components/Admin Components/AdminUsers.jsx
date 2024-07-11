@@ -19,7 +19,7 @@ const AdminUsers = () => {
       return;
     }
 
-    console.log("Deleting user with id:", id);
+    //console.log("Deleting user with id:", id);
 
     try {
       const dlt = await fetch(`http://localhost:8000/admin/users/delete/${id}`, {
@@ -35,7 +35,7 @@ const AdminUsers = () => {
       }
 
       const responseData = await dlt.json();
-      console.log("User deleted successfully:", responseData);
+      //console.log("User deleted successfully:", responseData);
       
       // Remove the deleted user from the state
       setUserData(userData.filter(user => user._id !== id));
@@ -124,8 +124,8 @@ export default AdminUsers;
 //   }
 //   // DELETE
 //   // const deleteUser = async (id) => {
-//   //   console.log(id);
-//   //   console.log("tolken",tokenval);
+//   //   //console.log(id);
+//   //   //console.log("tolken",tokenval);
 //   //   try {
 //   //     const dlt = await fetch(`http://localhost:8000/admin/users/delete/${id}`, {
 //   //     method: "DELETE",
@@ -133,11 +133,11 @@ export default AdminUsers;
 //   //       Authorization: `Bearer ${tokenval}`, //as from postman and token is already fetched above from the user logged in
 //   //     },
 //   //   });
-//   //   console.log('Response:', dlt); 
+//   //   //console.log('Response:', dlt); 
 //   //   const dData = await dlt.json();
-//   //   console.log(`users after  delete ${dData}`);
+//   //   //console.log(`users after  delete ${dData}`);
 //   //   } catch (e) {  
-//   //  console.log(e);
+//   //  //console.log(e);
 //   //    }
     
 //   // };
@@ -149,7 +149,7 @@ export default AdminUsers;
 //       return;
 //     }
     
-//     console.log("Deleting user with id:", id);
+//     //console.log("Deleting user with id:", id);
     
 //     try {
 //       const dlt = await fetch(`http://localhost:8000/admin/users/delete/${id}`, {
@@ -165,7 +165,7 @@ export default AdminUsers;
 //       }
   
 //       const responseData = await dlt.json();
-//       console.log("User deleted successfully:", responseData);
+//       //console.log("User deleted successfully:", responseData);
 //     } catch (error) {
 //       console.error("Error deleting user:", error);
 //     }
