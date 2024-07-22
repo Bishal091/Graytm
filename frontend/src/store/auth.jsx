@@ -60,7 +60,7 @@ const [accountId, setAccountId] = useState(0);
 // const userDataCollection = async() =>{
 //     try {
 //         // setIsLoading(true);
-//         const response = await fetch('http://localhost:8000/graytm/user/',{
+//         const response = await fetch('https://graytm-wallet.onrender.com/graytm/user/',{
 //             method:"GET",
 //             headers:{
 //                 Authorization:`Bearer ${tokenval}`//as from postman and token is already fetched above from the user logged in
@@ -90,7 +90,7 @@ const [accountId, setAccountId] = useState(0);
  
 // try {
 
-//     const response = await fetch('http://localhost:8000/auth/service',{
+//     const response = await fetch('https://graytm-wallet.onrender.com/auth/service',{
 //         method:"GET",
 //     });
 
@@ -111,7 +111,7 @@ const [accountId, setAccountId] = useState(0);
 
 // const adminFuncUsers = async ()=>{
 //     try {
-//         const adminResponse = await fetch('http://localhost:8000/admin/users',{
+//         const adminResponse = await fetch('https://graytm-wallet.onrender.com/admin/users',{
 //             method:"GET",
 //             headers:{
 //                 Authorization:`Bearer ${tokenval}`//as from postman and token is already fetched above from the user logged in
@@ -140,7 +140,7 @@ const [accountId, setAccountId] = useState(0);
 // ADMIN CONTACT/MESSAGES
 // const adminFuncContacts = async ()=>{
 //     try {
-//         const adminContactResponse = await fetch('http://localhost:8000/admin/contacts',{
+//         const adminContactResponse = await fetch('https://graytm-wallet.onrender.com/admin/contacts',{
 //             method:"GET",
 //             headers:{
 //                 Authorization:`Bearer ${tokenval}`//as from postman and token is already fetched above from the user logged in
@@ -167,7 +167,7 @@ const [accountId, setAccountId] = useState(0);
 // useEffect(() => {
 //     const getBalance = async () => {
 //       try {
-//         const balanceResponse = await fetch('http://localhost:8000/graytm/account/balance', {
+//         const balanceResponse = await fetch('https://graytm-wallet.onrender.com/graytm/account/balance', {
 //           method: "GET",
 //           headers: {
 //             Authorization: `Bearer ${tokenval}` // assuming tokenval is accessible

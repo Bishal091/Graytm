@@ -16,6 +16,7 @@ import { SendMoney } from '../pages/SendMoney'
 import { useAuth } from './store/auth'
 import Transfer from '../pages/Transfer'
 import Footer from '../components/Footer'
+import Verify from '../pages/Verify'
 
 
 
@@ -48,7 +49,8 @@ const App = () => {
               {/* <Route path='services' element={<AdminUsers/>}/> */}
             {/* </Route>
           )} */}
-      <Route path='*' element={<Error/>}/>
+          <Route path="/graytm/user/verify-email" element={<Verify/>} />
+      <Route path='*' element={<Error  message="Something went wrong!"/>}/>
     </Routes>
     <Footer/>
 

@@ -47,7 +47,7 @@ This is a MERN stack project with separate folders for the frontend and backend.
 ## Usage
 
 - The frontend will be running on `http://localhost:5172`.
-- The backend API will be available at `http://localhost:8000`.
+- The backend API will be available at `https://graytm-wallet.onrender.com`.
 
 ## Features
 

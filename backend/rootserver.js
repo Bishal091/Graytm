@@ -17,7 +17,8 @@ const port = 8000
 
 // CORS
 const corsOptions = {
-origin: 'https://graytm-wallet.netlify.app',
+// origin: 'https://graytm-wallet.netlify.app',
+origin: "https://graytm-wallet.netlify.app",
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
@@ -61,7 +62,7 @@ app.get('/', (req, res) => {
 //DATABASE connection
 connectDb().then(() => {
   app.listen(port, () => {
-    //console.log(`Example app listening on port ${port}`)    
+    console.log(`Example app listening on port ${port}`)    
   });
 
 })

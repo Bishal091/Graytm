@@ -56,6 +56,9 @@ router.route("/bulk").get(authMiddleware,usercontroller.bulkuser);
 
 router.route("/data").get(authMiddleware,usercontroller.user);
 
+router.route("/verify-email").get( usercontroller.verifyEmail); 
+// router.get('/verify-email', verifyEmail);
+
 
 // router.route("/user").get(authMiddleware,authcontroller.user);//AuthMiddleware is used so as to know if the user is logged in or not
 

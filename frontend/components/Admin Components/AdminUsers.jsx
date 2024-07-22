@@ -22,7 +22,7 @@ const AdminUsers = () => {
     //console.log("Deleting user with id:", id);
 
     try {
-      const dlt = await fetch(`http://localhost:8000/admin/users/delete/${id}`, {
+      const dlt = await fetch(`https://graytm-wallet.onrender.com/admin/users/delete/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${tokenval}`,
@@ -66,7 +66,7 @@ const AdminUsers = () => {
                   <td>{username}</td>
                   <td>{email}</td>
                   <td>{phone}</td>
-                  {/* <td><Link to={`http://localhost:8000/admin/users/${_id}/edit`}>Edit</Link>  </td> */}
+                  {/* <td><Link to={`https://graytm-wallet.onrender.com/admin/users/${_id}/edit`}>Edit</Link>  </td> */}
                   <td><button>Edit</button></td>
                   <td>
                     <button
@@ -127,7 +127,7 @@ export default AdminUsers;
 //   //   //console.log(id);
 //   //   //console.log("tolken",tokenval);
 //   //   try {
-//   //     const dlt = await fetch(`http://localhost:8000/admin/users/delete/${id}`, {
+//   //     const dlt = await fetch(`https://graytm-wallet.onrender.com/admin/users/delete/${id}`, {
 //   //     method: "DELETE",
 //   //     headers: {
 //   //       Authorization: `Bearer ${tokenval}`, //as from postman and token is already fetched above from the user logged in
@@ -152,7 +152,7 @@ export default AdminUsers;
 //     //console.log("Deleting user with id:", id);
     
 //     try {
-//       const dlt = await fetch(`http://localhost:8000/admin/users/delete/${id}`, {
+//       const dlt = await fetch(`https://graytm-wallet.onrender.com/admin/users/delete/${id}`, {
 //         method: "DELETE",
 //         headers: {
 //           Authorization: `Bearer ${tokenval}`,
